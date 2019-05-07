@@ -381,7 +381,7 @@ recent_snakes.toPandas()
 #----------------------
 
 # Lets look at this more closely and find the average cost by AnimalGroup
-cost_by_animal = recent_rescue.groupBy("AnimalGroup").agg(f.mean("TotalCost"))
+cost_by_animal = rescue.groupBy("AnimalGroup").agg(f.mean("TotalCost"))
 cost_by_animal.printSchema()
 
 # Lets sort by average cost and display the highest
@@ -448,7 +448,7 @@ avg_cost_by_animal
 
 avg_cost_by_animal = (
     rescue.filter(
-        recent_rescue.AnimalGroup.isin(
+        rescue.AnimalGroup.isin(
             "Horse", 
             "Goat", 
             "Cat", 
@@ -532,12 +532,13 @@ result.limit(10).toPandas()
 ## Writing Data
 #------------------------------
 
-## To HDFS 
-rescue_with_pop.write.parquet(f'/tmp/rescue_with_pop.parquet')
+## To HDFS
+path = '/user/username/rescue_with_pop.parquet'
+rescue_with_pop.write.parquet(path)
 
 # Note that if the file exists, it will not let you overwright it. You must first delete
 # it with the hdfs tool. This can be run from the console with 
-!hdfs dfs -rm -r /tmp/rescue_with_pop.parquet
+!hdfs dfs -rm -r /user/username/rescue_with_pop.parquet
 
 # Also note that each user and workspace will have its own home directory which you can,
 # save work to.
@@ -592,11 +593,11 @@ spark.sql('DROP TABLE IF EXISTS training.my_rescue_table')
 
 ### IPython
 
-#* who / whos
+#* Show defined variables: who / whos
 
-#* reset
+#* Clear all variables: reset
 
-#* pwd / cd / ls / mv / cp
+#* Directory navigation and file operations: pwd / cd / ls / mv / cp
 
 #-----------------------
 ## Further Resource
