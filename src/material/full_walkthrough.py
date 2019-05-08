@@ -637,9 +637,9 @@ spark.sql('DROP TABLE IF EXISTS training.my_rescue_table')
 
 #* Tab completion
 
-#* Run larger sections with - Shift + PgUp / PgDn then Ctr+Enter
+#* Run larger sections with - Shift + PgUp / PgDn then Ctrl+Enter
 
-#* Clear the Console output with Ctr+L
+#* Clear the Console output with Ctrl+L
 
 ### IPython
 
