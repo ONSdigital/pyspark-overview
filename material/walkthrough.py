@@ -25,7 +25,7 @@
 #  the project. 
 # * Different languages possible (Python, R Scala)
 # * Basic file browser, basic editor + REPL
-# * Run code in editor with Ctr+Enter for current line or 'Run all lines' button
+# * Run code in editor with Ctrl+Enter for current line or 'Run all lines' button
 #
 # Additional Features:
 # * Comments are rendered as Markdown 
