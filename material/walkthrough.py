@@ -536,13 +536,15 @@ result.limit(10).toPandas()
 # Note that each user and workspace will have its own home directory which you can save work to.
 
 # ```python
-# username='your-username-on-hue'
-# rescue_with_pop.write.parquet(f'/user/{username}/rescue_with_pop.parquet')
+#  username='your-username-on-hue'
+#  rescue_with_pop.write.parquet(f'/user/{username}/rescue_with_pop.parquet')
 #```
 
 # Note that if the file exists, it will not let you overwright it. You must first delete
 # it with the hdfs tool. This can be run from the console with 
-!hdfs dfs -rm -r /user/username/rescue_with_pop.parquet
+# ```bash
+# !hdfs dfs -rm -r /user/username/rescue_with_pop.parquet
+#```
 
 
 # Benefits of parquet is that type schema are captured
