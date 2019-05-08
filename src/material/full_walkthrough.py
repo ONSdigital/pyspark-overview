@@ -76,7 +76,7 @@ help(f.to_date)
 
 # For this Training setup: 
 #  *  max executor cores = 2
-#  *  max executor memory = 2g (this included overheads)
+#  *  max executor memory = 1500m (this included overheads)
 
 spark = (
     SparkSession.builder.appName("my-spark-app")
