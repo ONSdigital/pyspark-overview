@@ -532,9 +532,13 @@ result.limit(10).toPandas()
 ## Writing Data
 #------------------------------
 
-## To HDFS
-path = '/user/username/rescue_with_pop.parquet'
-rescue_with_pop.write.parquet(path)
+## TO HDFS
+# Note that each user and workspace will have its own home directory which you can save work to.
+
+# ```python
+#  username='your-username-on-hue'
+#  rescue_with_pop.write.parquet(f'/user/{username}/rescue_with_pop.parquet')
+#```
 
 # Note that if the file exists, it will not let you overwrite it. You must first delete
 # it with the `hdfs` tool. This can be run from the console with 
