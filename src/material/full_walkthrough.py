@@ -25,7 +25,7 @@
 #  the project. 
 # * Different languages possible (Python, R Scala)
 # * Basic file browser, basic editor + REPL
-# * Run code in editor with Ctr+Enter for current line or 'Run all lines' button
+# * Run code in editor with Ctrl+Enter for current line or 'Run all lines' button
 #
 # Additional Features:
 # * Comments are rendered as Markdown 
@@ -76,7 +76,7 @@ help(f.to_date)
 
 # For this Training setup: 
 #  *  max executor cores = 2
-#  *  max executor memory = 2g (this included overheads)
+#  *  max executor memory = 1500m (this includes overheads)
 
 spark = (
     SparkSession.builder.appName("my-spark-app")
@@ -146,7 +146,7 @@ rescue.printSchema()
 # `.show(n=20, truncate=True)`.
 rescue.show(10, truncate=False)
 
-# It can get real messy to display everything this way with wide data, recomendations are:
+# It can get real messy to display everything this way with wide data, recommendations are:
 # 1.  Subset to fewer columns
 # 2.  convert to pandas df
 # 3.  copy to text file
@@ -214,7 +214,7 @@ rescue.limit(10).toPandas()
 ### Filter data to just last 7 years
 
 recent_rescue = rescue.filter(rescue.CalYear > 2012)
-# Or equivilantly
+# Or equivalently 
 recent_rescue = rescue.filter('CalYear > 2012')
 
 recent_rescue.limit(10).toPandas()
@@ -225,7 +225,7 @@ recent_rescue.limit(10).toPandas()
 #> Filter the recent data to find all the those with AnimalGroup equal to 'Fox'
 
 foxes = rescue.filter(rescue.AnimalGroup == 'Fox')
-# Or equivilantly
+# Or equivalently 
 foxes = rescue.filter('AnimalGroup == "Fox"')
 
 foxes.limit(10).toPandas()
@@ -317,7 +317,7 @@ bottom_10.toPandas()
 # So it looks like we may have a lot of missing values to account for (which is why there are 
 # a lot of blanks).
 
-## Handeling Missing values
+## Handling Missing values
 
 # Lets count the number of missing values in these columns. Columns have a `isNull` and 
 # `isNotNull` function, which can be used with `.filter()` 
@@ -367,7 +367,7 @@ bottom_10.toPandas()
 # ```
 #
 # Advice is to be consistent in using one approach. Here I've used the syntax 
-# thats most similar to pandas with `df.sort("age", ascending=False)`
+# that is most similar to pandas with `df.sort("age", ascending=False)`
 
 ## Adding Indicator Variables/Flags
 
@@ -439,7 +439,7 @@ result = (
 # Note, the above was a fair bit of work involving multiple stages. Once we 
 # are more clear with what we want, several of these steps can be combined by
 # chaining them together. Code written in this way gets long fast, and so its 
-# encouraged to lay it out verticaly with indentation, and use parentheses to
+# encouraged to lay it out vertically with indentation, and use parentheses to
 # get python to evaluate expressions over multiple lines. 
 
 avg_cost_by_animal = (
@@ -479,7 +479,7 @@ incident_counts = (
 ### A Few Tips and Tricks
 
 # I've rewritten the above method chaining example using a few additional functions to give it more 
-# flexibly, like `.isin()` and making use of mutliple functions to`.agg()`, 
+# flexibly, like `.isin()` and making use of multiple functions to `.agg()`, 
 #
 # Note also that the `alias()` function is a way of specifying the name of the column
 # in the output 
@@ -526,7 +526,7 @@ outward_code_pop.show()
 
 # Now lets join this based on the Postcode Outward code
 
-# As these columns names are slightly different, we can express this mapping in the
+# As these column names are slightly different, we can express this mapping in the
 # on argument.
 rescue_with_pop = (
     rescue.join(
@@ -542,7 +542,7 @@ rescue_with_pop.limit(10).toPandas()
 ## Using SQL
 #---------------------------
 
-# You can also swap between pyspark and sql during your workflow
+# You can also swap between PySpark and SQL during your workflow
 
 # As we read this data from CSV (not from a Hive Table), we need to first register a
 # temporary table to use the SQL interface. If you have read in data from an existing SQL 
@@ -585,18 +585,23 @@ result.show(truncate=False)
 #  rescue_with_pop.write.parquet(f'/user/{username}/rescue_with_pop.parquet')
 #```
 
-# Note that if the file exists, it will not let you overwright it. You must first delete
-# it with the hdfs tool. This can be run from the console with 
-# ```bash
-# !hdfs dfs -rm -r /user/username/rescue_with_pop.parquet
-#```
+# Note that if the file exists, it will not let you overwrite it. You must first delete
+# it with the `hdfs` tool. This can be run from the console with 
+!hdfs dfs -rm -r /user/username/rescue_with_pop.parquet
+
+# Also note that each user and workspace will have its own home directory which you can,
+# save work to.
+# ````python
+# username='your-username-on-hue'
+# rescue_with_pop.write.parquet(f'/user/{username}/rescue_with_pop.parquet')
+# ````
 
 
-# Benefits of parquet is that type schema are captured
-# Its also a column format which makes loading in subsets of columns a lot faster for 
+# Benefits of parquet is that type schema are captured.
+# It's also a column format which makes loading in subsets of columns a lot faster for 
 # large datasets.
 
-# However it is not designed to be updated in place (imutable), so may have to delete and 
+# However it is not designed to be updated in place (immutable), so may have to delete and 
 # recreate files, which requires using the terminal commands. It is also harder to view 
 # the data in HUE, as it first needs to be loaded into a table (beyond the scope of this
 # session).
@@ -628,13 +633,13 @@ spark.sql('DROP TABLE IF EXISTS training.my_rescue_table')
 
 ### Editor
 
-#* double click = selct word; tripple click = select whole line
+#* Double click = select word; triple click = select whole line
 
 #* Tab completion
 
-#* Run larger sections with - Shift + PgUp / PgDn then Ctr+Enter
+#* Run larger sections with - Shift + PgUp / PgDn then Ctrl+Enter
 
-#* Clear the Console output with Ctr+L
+#* Clear the Console output with Ctrl+L
 
 ### IPython
 
